@@ -1,0 +1,39 @@
+@startuml
+
+class Asiento {
+  - reservado: boolean
+  + reservar(): void
+  + cancelarReserva(): void
+  + isReservado(): boolean
+  + toString(): String
+}
+
+class Sala {
+    - ArrayList<ArrayList<Asiento>> asientos
+    + Sala(int filas, int columnas)
+    + reservarAsiento(int fila, int columna)
+    + cancelarReservaAsiento(int fila, int columna)
+    + mostrarEstadoAsientos(): String
+}
+
+class Cine {
+    - ArrayList<Sala> salas
+    + Cine(int numSalas, int funcionesPorSala, int filasPorSala, int columnasPorSala)
+    + reservarAsiento(int sala, int funcion, int fila, int columna)
+    + cancelarReservaAsiento(int sala, int funcion, int fila, int columna)
+    + mostrarEstadoAsientosSala(int sala, int funcion): String
+}
+
+class Reserva {
+    - Cine cine
+    + Reserva(Cine cine, int numFunciones, int numSalas, int filasPorSala, int columnasPorSala)
+    + reservarAsiento(int funcion, int sala, int fila, int columna)
+    + cancelarReservaAsiento(int funcion, int sala, int fila, int columna)
+    + mostrarEstadoAsientos(): String
+}
+
+Asiento --|> Sala
+Sala --|> Cine
+Reserva --* Cine
+
+@enduml
